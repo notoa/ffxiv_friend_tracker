@@ -36,7 +36,7 @@ async def fetch_example_results(client_api, raider_list):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='%H:%M')
     api_key = ""
-    with open("raiders.json", "r") as file1:
+    with open("gamers.json", "r") as file1:
         raider_list = json.load(file1)
         del raider_list[0]
 
