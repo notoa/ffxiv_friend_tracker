@@ -1,0 +1,19 @@
+{
+    "meta": {
+        "Name": "Tank Achievments",
+        "Logo": ""
+    },
+    "mounts": [
+        "Warlion",
+        "Battle Lion",
+
+        "Warbear",
+        "Battle Bear",
+
+        "War Panther",
+        "Battle Panther",
+
+        "War Tiger",
+        "Battle Tiger"
+    ]
+}

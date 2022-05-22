@@ -1,0 +1,27 @@
+{
+    "meta": {
+        "Name": "Stormblood",
+        "Logo": "images/logos/stormblood.png"
+    },
+    "minions": [
+        "Wind-up Ramza",
+        "OMG",
+        "Construct 8",
+        "Wind-up Kefka",
+        "Wind-up Exdeath"
+    ],
+    "mounts": [
+        "Blissful Kamuy",
+        "Reveling Kamuy",
+        "Legendary Kamuy",
+        "Auspicious Kamuy",
+        "Lunar Kamuy",
+        "Euphonious Kamuy",
+        "Hallowed Kamuy",
+        "Kamuy Of The Nine Tails",
+
+        "Alte Roite",
+        "Air Force",
+        "Model O"
+    ]
+}

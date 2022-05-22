@@ -1,0 +1,32 @@
+{
+    "meta": {
+        "Name": "Shadowbringers",
+        "Logo": "images/logos/shadow.png"
+    },
+    "minions": [
+        "9S Automaton",
+        "Smaller Stubby",
+        "Wind-up Gaia",
+        "2P Automaton",
+        "2B Automaton",
+        "Wind-up Ryne",
+        "Pod 316",
+        "Pod 054",
+        "Eden Minor"
+    ],
+
+    "mounts": [
+        "Fae Gwiber",
+        "Innocent Gwiber",
+        "Shadow Gwiber",
+        "Gwiber Of Light",
+        "Ruby Gwiber",
+        "Emerald Gwiber",
+        "Diamond Gwiber",
+        "Landerwaffe",
+
+        "Skyslipper",
+        "Ramuh",
+        "Eden"
+    ]
+}

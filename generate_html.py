@@ -1,26 +1,45 @@
 import json
+import re
+
 from tabulate import tabulate
 
 from datetime import datetime
 from os import path, unlink
 
 
-def detect_mount(character, track_mounts, user_obtained):
+def equal(a, b):
+    # Ignore non-space and non-word characters
+    regex = re.compile(r'[^\s\w]')
+    return regex.sub('', a).lower() == regex.sub('', b).lower()
+
+
+def detect_mount_json(track_mounts, user_obtained):
     full_list = {}
     for t in track_mounts:
-        try:
-            full_list[str(t['Name'])] = f"""<a href="https://na.finalfantasyxiv.com/lodestone/character/{character['ID']}/">
-            <img src=\"{character['Avatar']}\" width=\"40\" height=\"40\"></a>"""
-        except TypeError:
-            full_list[t] = ""
-            for tr in user_obtained:
-                if str(t).lower() == str(tr['Name']).lower():
-                    full_list[t] = f"<img src=\"{tr['Icon']}\">"
-                    break
+        full_list[t] = ""
+        for tr in user_obtained:
+            if equal(str(t), str(tr['Name'])):
+                full_list[t] = f"<img src=\"{tr['Icon']}\">"
+                user_obtained.remove(tr)
+                break
     return full_list
 
 
-def generate_table(gamers, tracking_mounts):
+def detect_achievments(user, tracking):
+    full_list = {}
+    for t in tracking:
+        full_list[t] = ""
+        for tr in user:
+            if equal(str(t), str(tr['Name'])):
+
+                # full_list[t] = f"<img src=\"{tr['Icon']}\">"
+                full_list[t] = f"""{datetime.utcfromtimestamp(int(tr['Date'])).strftime("%Y")}"""
+                user.remove(tr)
+                break
+    return full_list
+
+
+def generate_table_json(gamers, tracking):
     html = {}
     for raider in gamers:
         html[f"{raider['id']}"] = []
@@ -28,11 +47,18 @@ def generate_table(gamers, tracking_mounts):
 
         if int(raider['id']) == 0:
             # Header
-            for t in tracking_mounts:
-                try:
-                    html[f"{raider['id']}"].append(f"<b>{t['Name']}</b>")
-                except TypeError:
-                    html[f"{raider['id']}"].append(f"{t}")
+            html[f"{raider['id']}"].append(f"<b>{tracking['meta']['Name']}</b>")
+            if "mounts" in tracking:
+                for t in tracking['mounts']:
+                    html[f"{raider['id']}"].append(f"🏇{t}")
+
+            if "minions" in tracking:
+                for t in tracking['minions']:
+                    html[f"{raider['id']}"].append(f"🐈{t}")
+
+            if "achivements" in tracking:
+                for t in tracking['achivements']:
+                    html[f"{raider['id']}"].append(f"⭐{t}")
             continue
 
         user_data_file = f"characters/{raider['world']}/{raider['forename']}_{raider['surname']}/user.json"
@@ -41,13 +67,28 @@ def generate_table(gamers, tracking_mounts):
             user = json.load(file1)
 
         char = user['Character']
-        # achieve = user['Achievements']['List']
-        # achieve_points = user['Achievements']['Points']
-        mounts = user['Mounts']
+        achieve = user['Achievements']['List']
 
-        char_track_mounts = detect_mount(character=char, track_mounts=tracking_mounts, user_obtained=mounts)
-        for mount in char_track_mounts:
-            html[f"{raider['id']}"].append(f"{char_track_mounts[mount]}")
+        html[f"{raider['id']}"].append(
+            f"""<a href="https://na.finalfantasyxiv.com/lodestone/character/{char['ID']}/">
+            <img src=\"{char['Avatar']}\" width=\"40\" height=\"40\"></a>""")
+
+        if "mounts" in tracking:
+            mounts = user['Mounts']
+            mount_table = detect_mount_json(track_mounts=tracking['mounts'], user_obtained=mounts)
+            for t in mount_table:
+                html[f"{raider['id']}"].append(f"{mount_table[t]}")
+
+        if "minions" in tracking:
+            mounts = user['Minions']
+            minion_table = detect_mount_json(track_mounts=tracking['minions'], user_obtained=mounts)
+            for t in minion_table:
+                html[f"{raider['id']}"].append(f"{minion_table[t]}")
+
+        if "achivements" in tracking:
+            set_acheivement_table = detect_achievments(user=achieve, tracking=tracking['achivements'])
+            for table in set_acheivement_table:
+                html[f"{raider['id']}"].append(f"{set_acheivement_table[table]}")
 
     return tabulate(html, tablefmt='unsafehtml')
 
@@ -64,17 +105,18 @@ if __name__ == '__main__':
         raider_list = json.load(file1)
 
     mount_file = [
-        "data/mounts/arr.json",
-        "data/mounts/heavensward.json",
-        "data/mounts/stormblood.json",
-        "data/mounts/shadowbringers.json",
-        "data/mounts/endwalker.json",
-        "data/mounts/tanks.json",
-        "data/mounts/vendor.json",
-        "data/mounts/pvp.json",
-        "data/mounts/other.json",
-        "data/mounts/skybuilders.json",
-        "data/mounts/bozja.json"
+        "data/arr.json",
+        "data/heavensward.json",
+        "data/stormblood.json",
+        "data/shadowbringers.json",
+        "data/endwalker.json",
+        "data/tanks.json",
+        "data/vendor.json",
+        "data/pvp.json",
+        "data/other.json",
+        "data/skybuilders.json",
+        "data/bozja.json",
+        "data/blumage.json"
     ]
     extra_mount_file = "data/download.json"
     if path.exists(extra_mount_file):
@@ -94,26 +136,10 @@ if __name__ == '__main__':
         with open(tracking_mounts, "r", encoding="utf-8") as file1:
             tracker = json.load(file1)
 
-        try:
-            count = 0
-            for ex in extra_map:
-                for track in tracker:
-                    if str(ex).lower().replace(" ", "").strip() == str(track).lower().replace(" ", "").strip():
-                        print(f"Duplicate {ex}")
-                        del extra_map[count]
-                count += 1
-        except:
-            extra_map=[]
-
-        if tracker[0]['Logo']:
-            if str(tracker[0]['Logo'][-4:]).lower() == '.png':
-                html_data += f"<img src=\"{tracker[0]['Logo']}\" width=\"40\" height=\"40\" >"
-        html_data += generate_table(gamers=raider_list, tracking_mounts=tracker) + "<br><br>"
-
-    if extra_map:
-        # GET https://ffxivcollect.com/api/mounts/
-        print("Generate Extra from download.json")
-        html_data += generate_table(gamers=raider_list, tracking_mounts=extra_map) + "<br><br>"
+        if tracker['meta']['Logo']:
+            if str(tracker['meta']['Logo'][-4:]).lower() == '.png':
+                html_data += f"<img src=\"{tracker['meta']['Logo']}\" width=\"40\" height=\"40\" >"
+        html_data += generate_table_json(gamers=raider_list, tracking=tracker) + "<br><br>"
 
     with open(index, "w+", encoding="utf-8") as file1:
         file1.write(f"""<!DOCTYPE html>

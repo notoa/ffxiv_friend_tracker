@@ -1,0 +1,22 @@
+{
+    "meta": {
+        "Name": "Realm Reborn",
+        "Logo": "images/logos/arr.png"
+    },
+    "minions": [
+        "Wind-up Onion Knight",
+        "Puff Of Darkness",
+        "Wind-up Echidna"
+    ],
+    "mounts": [
+        "Company Chocobo",
+        "Nightmare",
+        "Aithon",
+        "Xanthos",
+        "Gullfaxi",
+        "Enbarr",
+        "Markab",
+        "Boreas",
+        "Kirin"
+    ]
+}

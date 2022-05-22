@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "Name": "Endwalker",
+        "Logo": "images/logos/endwalker.png"
+    },
+    "minions": [
+        "Nosferatu",
+        "Wind-up Azeyma"
+    ],
+    "mounts": [
+        "Lynx Of Eternal Darkness",
+        "Lynx Of Divine Light",
+        "Bluefeather Lynx",
+        "Demi-Phoinix"
+    ]
+}
