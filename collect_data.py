@@ -42,9 +42,14 @@ if __name__ == '__main__':
         '-key',
         required=True
     )
+    parser.add_argument(
+        '--gamer_data',
+        help="List of gamers in gamers.json, keep the 1st line for header",
+        default="gamers.json"
+    )
     args = parser.parse_args()
 
-    with open("gamers.json", "r") as file1:
+    with open(args.gamer_data, "r") as file1:
         raider_list = json.load(file1)
         del raider_list[0]
 
