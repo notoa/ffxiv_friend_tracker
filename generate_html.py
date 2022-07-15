@@ -65,6 +65,9 @@ def generate_table_json(gamers, tracking):
                 for t in tracking['minions']:
                     html[f"{raider['id']}"].append(f"🐈{t}")
 
+            if "AchievementPoints" in tracking:
+                html[f"{raider['id']}"].append("⭐Points")
+
             if "achivements" in tracking:
                 for t in tracking['achivements']:
                     html[f"{raider['id']}"].append(f"⭐{t}")
@@ -86,27 +89,24 @@ def generate_table_json(gamers, tracking):
         if "ClassJobsBozjan" in tracking:
             bozja = char['ClassJobsBozjan']
             if bozja['Level'] is None:
-                bozja['Level'] = 0
-            message = f"Rank: {bozja['Level']}"
+                bozja['Level'] = ""
 
-            if bozja['Mettle'] is None:
-                bozja['Mettle'] = 0
-            else:
-                message = f"Level: {bozja['Level']}<br>Mettle:{bozja['Mettle']}"
-
-            html[f"{raider['id']}"].append(f"{message}")
+            html[f"{raider['id']}"].append(f"{bozja['Level']}")
 
         if "ClassJobsElemental" in tracking:
             eureka = char['ClassJobsElemental']
             if eureka['Level'] is None:
-                eureka['Level'] = 0
+                eureka['Level'] = ""
             html[f"{raider['id']}"].append(f"{eureka['Level']}")
 
         if "BLU" in tracking:
             for job in classes:
                 if job['Class']['Abbreviation'] == "BLU":
                     blu = job
-                    html[f"{raider['id']}"].append(f"{blu['Level']}")
+                    if blu['Level'] != 0:
+                        html[f"{raider['id']}"].append(f"{blu['Level']}")
+                    else:
+                        html[f"{raider['id']}"].append("")
 
         if "mounts" in tracking:
             mounts = user['Mounts']
@@ -119,6 +119,12 @@ def generate_table_json(gamers, tracking):
             minion_table = detect_mount_json(track_mounts=tracking['minions'], user_obtained=mounts)
             for t in minion_table:
                 html[f"{raider['id']}"].append(f"{minion_table[t]}")
+
+        if "AchievementPoints" in tracking:
+            if user['Achievements']['Points'] != 0:
+                html[f"{raider['id']}"].append(f"{user['Achievements']['Points']}")
+            else:
+                html[f"{raider['id']}"].append("")
 
         if "achivements" in tracking:
             set_acheivement_table = detect_achievments(user=achieve, tracking=tracking['achivements'])
