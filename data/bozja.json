@@ -1,9 +1,11 @@
 {
+    "ClassJobsBozjan": true,
     "meta": {
         "Name": "Bozja",
         "Logo": ""
     },
     "mounts": [
+        "Al-iklil",
         "Construct 14",
         "Cerberus",
         "Deinonychus",

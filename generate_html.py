@@ -47,6 +47,16 @@ def generate_table_json(gamers, tracking):
         if int(raider['id']) == 0:
             # Header
             html[f"{raider['id']}"].append(f"<b>{tracking['meta']['Name']}</b>")
+
+            if "ClassJobsBozjan" in tracking:
+                html[f"{raider['id']}"].append("Resistance Rank")
+
+            if "ClassJobsElemental" in tracking:
+                html[f"{raider['id']}"].append("Elemental Level")
+
+            if "BLU" in tracking:
+                html[f"{raider['id']}"].append("🪄")
+
             if "mounts" in tracking:
                 for t in tracking['mounts']:
                     html[f"{raider['id']}"].append(f"🏇{t}")
@@ -67,10 +77,36 @@ def generate_table_json(gamers, tracking):
 
         char = user['Character']
         achieve = user['Achievements']['List']
+        classes = char['ClassJobs']
 
         html[f"{raider['id']}"].append(
             f"""<a href="https://na.finalfantasyxiv.com/lodestone/character/{char['ID']}/">
             <img src=\"{char['Avatar']}\" width=\"40\" height=\"40\"></a>""")
+
+        if "ClassJobsBozjan" in tracking:
+            bozja = char['ClassJobsBozjan']
+            if bozja['Level'] is None:
+                bozja['Level'] = 0
+            message = f"Rank: {bozja['Level']}"
+
+            if bozja['Mettle'] is None:
+                bozja['Mettle'] = 0
+            else:
+                message = f"Level: {bozja['Level']}<br>Mettle:{bozja['Mettle']}"
+
+            html[f"{raider['id']}"].append(f"{message}")
+
+        if "ClassJobsElemental" in tracking:
+            eureka = char['ClassJobsElemental']
+            if eureka['Level'] is None:
+                eureka['Level'] = 0
+            html[f"{raider['id']}"].append(f"{eureka['Level']}")
+
+        if "BLU" in tracking:
+            for job in classes:
+                if job['Class']['Abbreviation'] == "BLU":
+                    blu = job
+                    html[f"{raider['id']}"].append(f"{blu['Level']}")
 
         if "mounts" in tracking:
             mounts = user['Mounts']
