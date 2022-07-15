@@ -1,4 +1,5 @@
 import asyncio
+import argparse
 import logging
 
 import os
@@ -35,10 +36,17 @@ async def fetch_example_results(client_api, raider_list):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='%H:%M')
-    api_key = ""
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--api_key',
+        '-key',
+        required=True
+    )
+    args = parser.parse_args()
+
     with open("gamers.json", "r") as file1:
         raider_list = json.load(file1)
         del raider_list[0]
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(fetch_example_results(client_api=api_key, raider_list=raider_list))
+    loop.run_until_complete(fetch_example_results(client_api=args.api_key, raider_list=raider_list))
