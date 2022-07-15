@@ -1,3 +1,4 @@
+import argparse
 import json
 import re
 
@@ -93,13 +94,21 @@ def generate_table_json(gamers, tracking):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--gamer_data',
+        help="List of gamers in gamers.json, keep the 1st line for header",
+        default="gamers.json"
+    )
+    args = parser.parse_args()
+
     html = {}
     html_data = ""
     index = "index.html"
     if path.exists(index):
         unlink(index)
 
-    with open("gamers.json", "r", encoding="utf-8") as file1:
+    with open(args.gamer_data, "r", encoding="utf-8") as file1:
         raider_list = json.load(file1)
 
     mount_file = [
