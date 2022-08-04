@@ -3,16 +3,17 @@
         "Name": "Shadowbringers",
         "Logo": "images/logos/shadow.png"
     },
+
     "minions": [
-        "9S Automaton",
-        "Smaller Stubby",
-        "Wind-up Gaia",
-        "2P Automaton",
-        "2B Automaton",
+        "Eden Minor",
         "Wind-up Ryne",
-        "Pod 316",
+        "Wind-up Gaia",
         "Pod 054",
-        "Eden Minor"
+        "Pod 316",
+        "2B Automaton",
+        "2P Automaton",
+        "Smaller Stubby",
+        "9S Automaton"
     ],
 
     "mounts": [
@@ -29,6 +30,7 @@
         "Ramuh",
         "Eden"
     ],
+
     "achivements":[
         "The First Law",
         "Uncanny Valley",
