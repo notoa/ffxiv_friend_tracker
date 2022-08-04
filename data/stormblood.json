@@ -4,11 +4,12 @@
         "Logo": "images/logos/stormblood.png"
     },
     "minions": [
-        "Wind-up Ramza",
-        "OMG",
-        "Construct 8",
+        "Wind-up Exdeath",
         "Wind-up Kefka",
-        "Wind-up Exdeath"
+        "OMG",
+
+        "Construct 8",
+        "Wind-up Ramza"
     ],
     "mounts": [
         "Blissful Kamuy",
@@ -23,5 +24,12 @@
         "Alte Roite",
         "Air Force",
         "Model O"
+    ],
+    "achivements": [
+        "Zodiac Thriller",
+        "Didn't Stop, Made It Pop",
+        "Orbonne to Pick",
+        "Ultimatum",
+        "Resistance Is Futile"
     ]
 }
