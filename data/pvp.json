@@ -4,16 +4,19 @@
         "Logo": ""
     },
     "mounts": [
-        "Construct VII",
-        "Flame Warsteed",
-        "Ginga",
-        "Gloria-class Airship",
         "Goten",
-        "Logistics System",
-        "Magitek Avenger A-1",
-        "Magitek Avenger",
+        "Ginga",
         "Raigo",
+        "Storm Warsteed",
         "Serpent Warsteed",
-        "Storm Warsteed"
+        "Flame Warsteed",
+        "Logistics System",
+        "Aerodynamics System",
+        "Magitek Avenger",
+        "Magitek Avenger A-1",
+        "Magitek Sky Armor",
+        "Safeguard System",
+        "Construct VII",
+        "Gloria-class Airship"
     ]
 }
