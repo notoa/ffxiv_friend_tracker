@@ -5,12 +5,15 @@
     },
     "minions": [
         "Nosferatu",
+        "Wind-up Erichthonios",
         "Wind-up Azeyma"
     ],
     "mounts": [
         "Lynx Of Eternal Darkness",
         "Lynx Of Divine Light",
         "Bluefeather Lynx",
-        "Demi-Phoinix"
+        "Lynx Of Imperious Wind",
+        "Demi-Phoinix",
+        "Sunforged"
     ]
 }

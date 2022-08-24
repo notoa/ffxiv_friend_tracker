@@ -3,6 +3,10 @@
         "Name": "PVP",
         "Logo": ""
     },
+    "minions": [
+        "Clockwork Cerulean Chaser",
+        "Clockwork Crimson Chaser"
+    ],
     "mounts": [
         "Goten",
         "Ginga",
@@ -17,6 +21,7 @@
         "Magitek Sky Armor",
         "Safeguard System",
         "Construct VII",
-        "Gloria-class Airship"
+        "Gloria-class Airship",
+        "Fylgja"
     ]
 }
