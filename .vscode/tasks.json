@@ -4,16 +4,20 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "generate_html",
-            "type": "shell",
+            "args": ["generate_html.py", "--gamer_data=${input:file}"],
             "command": "${config:python.defaultInterpreterPath}",
-            "args": ["generate_html.py", "--gamer_data=${input:file}"]
+            "icon": {"color": "terminal.ansiRed", "id": "window"},
+            "label": "generate_html",
+            "options": {"cwd": "${workspaceFolder}"},
+            "type": "shell"
         },
         {
-            "label": "collect user data",
-            "type": "shell",
+            "args": ["collect_data.py", "--api_key=${input:api}", "--gamer_data=${input:file}"],
             "command": "${config:python.defaultInterpreterPath}",
-            "args": ["collect_data.py", "--gamer_data=${input:file}", "--api_key=${input:api}"]
+            "icon": {"color": "terminal.ansiYellow", "id": "gather"},
+            "label": "collect user data",
+            "options": {"cwd": "${workspaceFolder}"},
+            "type": "shell"
         }
     ],
     "inputs": [
@@ -22,12 +26,12 @@
             "type": "promptString",
             "password": false,
             "description": "The path to your json file containing gamer information",
-            "default": "${fileWorkspaceFolder}/gamers.json"
+            "default": "${workspaceFolder}/gamers.json"
         },
         {
             "id": "api",
             "type": "promptString",
-            "password": false,
+            "password": true,
             "description": "Your FFXIV API Key"
         }
     ]
