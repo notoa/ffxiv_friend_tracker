@@ -12,7 +12,7 @@ if [ ! -d .venv ]; then
 fi
 
 # Install from pipfile
-pipenv install --dev --skip-lock
+python3 -m pipenv install --dev --skip-lock
 
 # Activate Python
 if [ -f .venv/Scripts/activate ]; then
