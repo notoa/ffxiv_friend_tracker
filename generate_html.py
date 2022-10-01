@@ -253,7 +253,17 @@ if __name__ == "__main__":
     ) as file1:
         file1.write(
             f"""<!DOCTYPE html>
-    <link rel="stylesheet" href="ffxiv.css" type="text/css">
+<style type="text/css">
+    table, th, td {{
+        border: 1px solid black;
+        border-collapse: collapse;
+        height: 47px;
+    }}
+    td img {{
+        padding: 2px;
+        display: block;
+    }}
+</style>
 <html>
 <head>
 <meta charset = "utf-8" />
