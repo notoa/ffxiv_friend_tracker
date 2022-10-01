@@ -1,0 +1,17 @@
+[[source]]
+    url = "https://pypi.python.org/simple"
+    verify_ssl = true
+    name = "pypi"
+
+[packages]
+    Django = "*"
+    toml = "*"
+    aiohttp = "*"
+    asyncio = "*"
+    requests = "*"
+    tabulate = "*"
+    pyxivapi = { git = 'git@github.com:xivapi/xivapi-py.git', ref = '0.5.1', editable = true }
+
+[dev-packages]
+    flake8 = "*"
+    black = "*"
