@@ -6,16 +6,19 @@
     "minions": [
         "Nosferatu",
         "Wind-up Erichthonios",
+        "Wind-up Athena",
         "Wind-up Azeyma",
         "Wind-up Halone"
     ],
     "mounts": [
         "Lynx Of Eternal Darkness",
         "Lynx Of Divine Light",
-        "Lynx Of Righteous Fire",
         "Bluefeather Lynx",
         "Lynx Of Imperious Wind",
+        "Lynx Of Righteous Fire",
+        "Lynx Of Fallen Shadow",
         "Demi-Phoinix",
-        "Sunforged"
+        "Sunforged",
+        "Megaloambystoma"
     ]
 }
