@@ -268,13 +268,7 @@ if __name__ == "__main__":
     <meta charset = "utf-8" />
       <title>Shinobu's Basement</title>
       <link rel = "icon" href = "https://xivapi.com/img-misc/mappy/aetheryte_small.png" type = "image/x-icon">
-      <script type="text/javascript">
-        function localize(t)
-        {{
-          var d=new Date(t+" UTC").toLocaleTimeString('en-US',{{ year:"numeric", month:"numeric", day:"numeric", second:"numeric", hour12: false, hour: '2-digit', minute: '2-digit', timeZoneName: "short" }});;
-          document.write(d.toString());
-        }}
-      </script>
+      <script type="text/javascript"  src="javascript.js"></script>
   </head>
 
 <body>
