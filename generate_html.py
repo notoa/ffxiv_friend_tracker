@@ -162,7 +162,6 @@ def generate_table_json(gamers, tracking):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--gamer_data",
@@ -254,26 +253,37 @@ if __name__ == "__main__":
         file1.write(
             f"""<!DOCTYPE html>
 <style type="text/css">
-    table, th, td {{
-        border: 1px solid black;
-        border-collapse: collapse;
-        height: 47px;
-    }}
-    td img {{
-        padding: 2px;
-        display: block;
-    }}
+  table, th, td {{
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 47px;
+  }}
+  td img {{
+    padding: 2px;
+    display: block;
+  }}
 </style>
 <html>
-<head>
-<meta charset = "utf-8" />
-<title>Shinobu's Basement</title>
-<link rel = "icon" href = "https://xivapi.com/img-misc/mappy/aetheryte_small.png" type = "image/x-icon">
-</head>
-Last Updated: {datetime.utcnow().strftime("%Y/%m/%d @%H:%M:%S")} UTC
-<hr>
-<h1>This site is only for friends of Shinobu!</h1>
+  <head>
+    <meta charset = "utf-8" />
+      <title>Shinobu's Basement</title>
+      <link rel = "icon" href = "https://xivapi.com/img-misc/mappy/aetheryte_small.png" type = "image/x-icon">
+      <script type="text/javascript">
+        function localize(t)
+        {{
+          var d=new Date(t+" UTC").toLocaleTimeString('en-US',{{ year:"numeric", month:"numeric", day:"numeric", second:"numeric", hour12: false, hour: '2-digit', minute: '2-digit', timeZoneName: "short" }});;
+          document.write(d.toString());
+        }}
+      </script>
+  </head>
+
 <body>
+
+Generated: <script type="text/javascript">localize("{datetime.utcnow().strftime("%m/%d/%Y %H:%M:%S")}");</script>
+
+<hr>
+<h1>Friends of Shinobu</h1>
+
 {html_data}
 </body></html>
 """
