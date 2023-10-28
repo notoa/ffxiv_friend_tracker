@@ -42,7 +42,14 @@ def detect_achievments(user, tracking):
                 str(t),
                 str(tr["Name"]),
             ):
-                full_list[t] = f"<img src=\"https://xivapi.com/{tr['Icon']}\">"
+                ts = int(tr["Date"])
+                full_list[t] = "".join(
+                    [
+                        f"<a href='https://ffxivcollect.com/achievements/{tr['ID']}'><img src=\"https://xivapi.com{tr['Icon']}\"></a>",
+                        '<hr><p><script type="text/javascript">achieve(',
+                        f"\"{datetime.utcfromtimestamp(ts).strftime('%m/%d/%Y %H:%M:%S')}\");</script></p>",
+                    ]
+                )
                 user.remove(tr)
                 break
     return full_list
@@ -236,7 +243,7 @@ if __name__ == "__main__":
 
         if tracker["meta"]["Logo"]:
             if str(tracker["meta"]["Logo"][-4:]).lower() == ".png":
-                html_data += f"<img src=\"{tracker['meta']['Logo']}\" width=\"40\" height=\"40\" >"
+                html_data += f"<img src=\"{tracker['meta']['Logo']}\" width=\"40\" height=\"40\">\n"
         html_data += (
             generate_table_json(
                 gamers=raider_list,
@@ -257,10 +264,17 @@ if __name__ == "__main__":
     border: 1px solid black;
     border-collapse: collapse;
     height: 47px;
+    font-size: 12px;
   }}
   td img {{
     padding: 2px;
     display: block;
+    font-size: 12px;
+  }}
+  p {{
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
   }}
 </style>
 <html>
@@ -269,10 +283,20 @@ if __name__ == "__main__":
       <title>Shinobu's Basement</title>
       <link rel = "icon" href = "https://xivapi.com/img-misc/mappy/aetheryte_small.png" type = "image/x-icon">
       <script type="text/javascript">
-        function localize(t)
-        {{
-          var d=new Date(t+" UTC").toLocaleTimeString('en-US',{{ year:"numeric", month:"numeric", day:"numeric", second:"numeric", hour12: false, hour: '2-digit', minute: '2-digit', timeZoneName: "short" }});;
+      function getLang() {{
+        if (navigator.languages != undefined)
+          return navigator.languages[0];
+        return navigator.language;
+        }}
+
+        function localize(t) {{
+          var d=new Date(t+" UTC").toLocaleTimeString(getLang(),{{ year:"numeric", month:'2-digit', day:'2-digit', second:"numeric", hour12: false, hour: '2-digit', minute: '2-digit', timeZoneName: "short" }});
           document.write(d.toString());
+        }}
+
+        function achieve(t) {{
+          var dd=new Date(t+" UTC").toLocaleTimeString(getLang(),{{ year:"numeric", month:'2-digit', day:'2-digit', hour: '2-digit', hour12: false, minute:'2-digit', timeZoneName: "short" }});
+          document.write(dd.toString().replace(',','<br>'));
         }}
       </script>
   </head>
