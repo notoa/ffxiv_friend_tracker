@@ -14,7 +14,9 @@ async def fetch_example_results(client_api, raider_list):
 
     for raider in raider_list:
         print(f"{raider}")
-        save_world_folder = f"characters/{raider['world']}/{raider['forename']}_{raider['surname']}"
+        save_world_folder = (
+            f"characters/{raider['world']}/{raider['forename']}_{raider['surname']}"
+        )
         if not os.path.exists(save_world_folder):
             os.makedirs(save_world_folder)
 
@@ -38,7 +40,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--api_key", "-key", required=True)
     parser.add_argument(
-        "--gamer_data", help="List of gamers in gamers.json, keep the 1st line for header", default="gamers.json"
+        "--gamer_data",
+        help="List of gamers in gamers.json, keep the 1st line for header",
+        default="gamers.json"
     )
     args = parser.parse_args()
 
@@ -47,4 +51,6 @@ if __name__ == "__main__":
         del raider_list[0]
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(fetch_example_results(client_api=args.api_key, raider_list=raider_list))
+    loop.run_until_complete(
+        fetch_example_results(client_api=args.api_key, raider_list=raider_list)
+    )
