@@ -20,17 +20,22 @@ async def fetch_example_results(client_api, raider_list):
         if not os.path.exists(save_world_folder):
             os.makedirs(save_world_folder)
 
-        character = await client.character_by_id(
-            lodestone_id=raider["id"],
-            extended=True,
-            include_freecompany=False,
-            include_achievements=True,
-            include_minions_mounts=True,
-            include_classjobs=False,
-        )
+        try:
+            character = await client.character_by_id(
+                lodestone_id=raider["id"],
+                extended=True,
+                include_freecompany=False,
+                include_achievements=True,
+                include_minions_mounts=True,
+                include_classjobs=False,
+            )
 
-        with open(f"{save_world_folder}/user.json", "w") as file1:
-            file1.write(json.dumps(character, sort_keys=True, indent=4))
+            with open(f"{save_world_folder}/user.json", "w") as file1:
+                file1.write(json.dumps(character, sort_keys=True, indent=4))
+
+        except pyxivapi.exceptions.XIVAPIError as err:
+            print("Issue with XIV Server")
+            raise err
 
     await client.session.close()
 
